@@ -6,7 +6,7 @@
 /*   By: snagulap <snagulap@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 13:21:10 by snagulap          #+#    #+#             */
-/*   Updated: 2023/10/06 12:02:12 by snagulap         ###   ########.fr       */
+/*   Updated: 2023/10/06 20:10:52 by snagulap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ t_vec3	vec3_add(t_vec3 u, t_vec3 v)
 	return (make_vec3(u.e[0] + v.e[0], u.e[1] + v.e[1], u.e[2] + v.e[2]));
 }
 
-// Function to subtract two vec3 vectors
-t_vec3	vec3_subtract(t_vec3 u, t_vec3 v)
+t_vec3	vec3_sub(t_vec3 u, t_vec3 v)
 {
 	return (make_vec3(u.e[0] - v.e[0], u.e[1] - v.e[1], u.e[2] - v.e[2]));
 }

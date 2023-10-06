@@ -6,7 +6,7 @@
 /*   By: snagulap <snagulap@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 14:25:12 by snagulap          #+#    #+#             */
-/*   Updated: 2023/10/06 13:21:29 by snagulap         ###   ########.fr       */
+/*   Updated: 2023/10/06 21:30:19 by snagulap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 # define MINIRT_H
 
 # include "mlx.h"
+# include "ray.h"
 # include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -25,18 +26,6 @@ typedef struct s_rgb // colors
 	double blue;
 	double rgb_in_hex_representation;
 }						t_rgb;
-
-typedef struct s_vec
-{
-	double				e[3];
-}						t_vec3;
-
-typedef struct s_coordinates
-{
-	double				x;
-	double				y;
-	double				z;
-}						t_coordinates;
 
 typedef struct s_ambient_lightning
 {
@@ -93,29 +82,7 @@ typedef struct s_minirt
 	t_cylinder			*cylinder_arr;
 }						t_minirt;
 
-typedef struct s_ray
-{
-	t_coordinates		orig;
-	t_vec3				dir;
-}						t_ray;
-
-t_vec3					make_vec3(double e0, double e1, double e2);
-t_vec3					vec3_negate(t_vec3 v);
-double					vec3_get(const t_vec3 *v, int i);
-void					vec3_set(t_vec3 *v, int i, double value);
-t_vec3					vec3_add(t_vec3 u, t_vec3 v);
-t_vec3					vec3_subtract(t_vec3 u, t_vec3 v);
-t_vec3					vec3_multiply(t_vec3 u, t_vec3 v);
-t_vec3					vec3_scalar_multiply(t_vec3 v, double t);
-t_vec3					vec3_scalar_divide(t_vec3 v, double t);
-double					vec3_dot(t_vec3 u, t_vec3 v);
-t_vec3					vec3_cross(t_vec3 u, t_vec3 v);
-double					vec3_length(t_vec3 v);
-double					vec3_length_squared(t_vec3 v);
-t_vec3					vec3_normalize(t_vec3 v);
-t_ray					make_ray(t_coordinates origin, t_vec3 direction);
-t_coordinates			ray_origin(const t_ray *r);
-t_vec3					ray_direction(const t_ray *r);
-t_coordinates			ray_at(const t_ray *r, double t);
+void					image_Setup(void);
+void					camera_viewpoint(void *mlx, void *window);
 
 #endif

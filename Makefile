@@ -6,7 +6,7 @@
 #    By: snagulap <snagulap@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/30 15:15:48 by snagulap          #+#    #+#              #
-#    Updated: 2023/10/06 10:47:38 by snagulap         ###   ########.fr        #
+#    Updated: 2023/10/06 20:18:14 by snagulap         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,8 @@ SRC_DIR		=	src/
 OBJ_DIR		=	obj/
 INC_DIR		=	include/
 
-CFILES=main.c vec.c
-OFILES=main.o vec.o
+CFILES=main.c vec.c ray.c
+OFILES=main.o vec.o ray.o
 
 SRC=$(addprefix $(SRC_DIR), $(CFILES))
 OBJ=$(addprefix $(OBJ_DIR), $(OFILES))
