@@ -6,7 +6,7 @@
 /*   By: snagulap <snagulap@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 13:21:10 by snagulap          #+#    #+#             */
-/*   Updated: 2023/10/07 15:09:51 by snagulap         ###   ########.fr       */
+/*   Updated: 2023/10/08 16:54:59 by snagulap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ t_vec3	vec3_scalar_multiply(t_vec3 v, double t)
 // Function to divide a vec3 by a scalar
 t_vec3	vec3_scalar_divide(t_vec3 v, double t)
 {
-	return (vec3_scalar_multiply(v, 1.0 / t));
+	return (make_vec3(v.e[0] * (1 / t), v.e[1] * (1 / t), v.e[2] * (1 / t)));
 }
 
 // Function to compute the dot product of two vec3 vectors

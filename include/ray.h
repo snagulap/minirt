@@ -6,7 +6,7 @@
 /*   By: snagulap <snagulap@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 16:48:54 by snagulap          #+#    #+#             */
-/*   Updated: 2023/10/07 12:07:33 by snagulap         ###   ########.fr       */
+/*   Updated: 2023/10/09 10:56:59 by snagulap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ double		vec3_length(t_vec3 v);
 double		vec3_length_squared(t_vec3 v);
 t_vec3		vec3_normalize(t_vec3 v);
 t_ray		make_ray(t_vec3 origin, t_vec3 direction);
-t_vec3		ray_origin(const t_ray *r);
-t_vec3		ray_direction(const t_ray *r);
-t_vec3		ray_at(const t_ray *r, double t);
+t_vec3		ray_origin(const t_ray r);
+t_vec3		ray_direction(const t_ray r);
+t_vec3		ray_at(const t_ray r, double t);
 
 #endif

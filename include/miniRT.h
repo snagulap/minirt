@@ -6,7 +6,7 @@
 /*   By: snagulap <snagulap@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 14:25:12 by snagulap          #+#    #+#             */
-/*   Updated: 2023/10/06 21:30:19 by snagulap         ###   ########.fr       */
+/*   Updated: 2023/10/09 10:57:07 by snagulap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,12 @@ typedef struct s_minirt
 	t_plane				*plane_arr;
 	t_cylinder			*cylinder_arr;
 }						t_minirt;
+
+typedef struct
+{
+	t_vec3				center;
+	double				radius;
+}						t_Sphere;
 
 void					image_Setup(void);
 void					camera_viewpoint(void *mlx, void *window);

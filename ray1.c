@@ -6,7 +6,7 @@
 /*   By: snagulap <snagulap@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 13:25:36 by snagulap          #+#    #+#             */
-/*   Updated: 2023/10/07 13:26:13 by snagulap         ###   ########.fr       */
+/*   Updated: 2023/10/09 11:36:05 by snagulap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,3 +80,102 @@ t_color	ray_color(const t_ray *r)
 // 		j++;
 // 	}
 // }
+
+/*
+void	camera_viewpoint(void *mlx, void *window)
+{
+	int		j;
+	int		i;
+	int		color;
+	double	aspect_ratio;
+	int		image_width;
+	double	focal_length;
+	double	viewport_height;
+	int		image_height;
+	double	viewport_width;
+	t_vec3	camera_center;
+	t_vec3	viewport_u;
+	t_vec3	viewport_v;
+	t_vec3	pixel_delta_u;
+	t_vec3	pixel_delta_v;
+	t_vec3	viewport_upper_left;
+	t_vec3	pixel_center;
+	t_vec3	ray_direction;
+	t_vec3	pixel00_loc;
+	t_ray	r;
+	t_color	pixel_color;
+	t_vec3	cal;
+	t_vec3	cal1;
+	t_vec3	cal2;
+	int		width;
+	int		height;
+	t_vec3	camera_center;
+	t_vec3	viewport_u;
+	t_vec3	viewport_v;
+	t_vec3	pixel_delta_u;
+	t_vec3	pixel_delta_v;
+	t_vec3	viewport_upper_left;
+	t_vec3	pixel00_loc;
+	t_ray	r;
+	t_color	pixel_color;
+	int		color;
+	t_vec3	ray_direction;
+	int		width;
+	int		height;
+	t_vec3	camera_center;
+	t_vec3	viewport_u;
+	t_vec3	viewport_v;
+	t_vec3	pixel_delta_u;
+	t_vec3	pixel_delta_v;
+	t_vec3	viewport_upper_left;
+	t_vec3	pixel00_loc;
+	t_ray	r;
+	t_color	pixel_color;
+	int		color;
+
+	j = 0;
+	i = 0;
+	aspect_ratio = 16.0 / 9.0;
+	image_width = 800;
+	focal_length = 1.0;
+	viewport_height = 2.0;
+	image_height = 400; //(int)(image_width / aspect_ratio);
+	printf("%d\n", image_height);
+	if (image_height < 1)
+		image_height = 1;
+	viewport_width = viewport_height * ((double)image_width / image_height);
+	printf("%f %f\n", viewport_height, viewport_width);
+	camera_center = make_vec3(0, 0, 0);
+	viewport_u = make_vec3(viewport_width, 0, 0);
+	viewport_v = make_vec3(0, -viewport_height, 0);
+	pixel_delta_u = vec3_scalar_divide(viewport_u, image_width);
+	pixel_delta_v = vec3_scalar_divide(viewport_v, image_height);
+	cal = vec3_add(pixel_delta_u, pixel_delta_v);
+	cal = vec3_scalar_multiply(cal, 0.5);
+	cal1 = vec3_scalar_divide(viewport_v, 2.0);
+	cal2 = vec3_scalar_divide(viewport_u, 2.0);
+	cal1 = vec3_sub(cal1, cal2);
+	cal2 = vec3_sub(camera_center, make_vec3(0, 0, focal_length));
+	viewport_upper_left = vec3_sub(cal1, cal2);
+	pixel00_loc = vec3_add(viewport_upper_left, cal);
+	printf("%f %f %f\n", pixel00_loc.e[0], pixel00_loc.e[1], pixel00_loc.e[2]);
+	for (j = 0; j < image_height; j++)
+	{
+		for (i = 0; i < image_width; i++)
+		{
+			pixel_center = vec3_add(pixel00_loc,
+					vec3_scalar_multiply(pixel_delta_u, i));
+			pixel_center = vec3_add(pixel_center,
+					vec3_scalar_multiply(pixel_delta_v, j));
+			ray_direction = vec3_sub(pixel_center, camera_center);
+			r = make_ray(camera_center, ray_direction);
+			pixel_color = rayColor(&r);
+			color = ((int)(255.999 * pixel_color.e[0]) << 16) | ((int)(255.999
+						* pixel_color.e[1]) << 8) | (int)(255.999
+					* pixel_color.e[2]);
+			mlx_pixel_put(mlx, window, i, j, color);
+		}
+	}
+	mlx_loop(mlx);
+	mlx_destroy_window(mlx, window);
+}*/
