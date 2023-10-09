@@ -6,7 +6,7 @@
 /*   By: snagulap <snagulap@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 14:25:12 by snagulap          #+#    #+#             */
-/*   Updated: 2023/10/09 10:57:07 by snagulap         ###   ########.fr       */
+/*   Updated: 2023/10/09 13:41:03 by snagulap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,14 @@
 # include <stdio.h>
 # include <stdlib.h>
 
+typedef t_vec3			t_color;
+
 typedef struct s_rgb // colors
 {
-	double red;
-	double green;
-	double blue;
-	double rgb_in_hex_representation;
+	double	red;
+	double	green;
+	double	blue;
+	double	rgb_in_hex_representation;
 }						t_rgb;
 
 typedef struct s_ambient_lightning
@@ -45,13 +47,13 @@ typedef struct s_light
 {
 	t_coordinates		coordinates_of_the_light_point;
 	double				light_brightness_ratio;
-	t_rgb rgb_colors; // bonus
+	t_rgb				rgb_colors; // bonus
 }						t_light;
 
 typedef struct s_sphere
 {
-	t_coordinates		coordinates_of_the_sphere_center;
-	double				sphere_diameter;
+	t_vec3				center;
+	double				radius;
 	t_rgb				rgb_colors;
 }						t_sphere;
 
@@ -82,13 +84,12 @@ typedef struct s_minirt
 	t_cylinder			*cylinder_arr;
 }						t_minirt;
 
-typedef struct
-{
-	t_vec3				center;
-	double				radius;
-}						t_Sphere;
-
 void					image_Setup(void);
 void					camera_viewpoint(void *mlx, void *window);
+t_color					rayColor(const t_ray *ray);
+int						solveQuadratic(double a, double b, double c,
+							double *root1, double *root2);
+int						hitSphere(const t_sphere *sphere, const t_ray *ray,
+							double *t);
 
 #endif
