@@ -6,7 +6,7 @@
 /*   By: snagulap <snagulap@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/04 13:21:10 by snagulap          #+#    #+#             */
-/*   Updated: 2023/10/08 16:54:59 by snagulap         ###   ########.fr       */
+/*   Updated: 2023/10/09 12:41:23 by snagulap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,11 @@ void	vec3_set(t_vec3 *v, int i, double value)
 t_vec3	vec3_add(t_vec3 u, t_vec3 v)
 {
 	return (make_vec3(u.e[0] + v.e[0], u.e[1] + v.e[1], u.e[2] + v.e[2]));
+}
+
+t_vec3	vec3_scalar_add(t_vec3 v, double value)
+{
+	return (make_vec3(v.e[0] + value, v.e[1] + value, v.e[2] + value));
 }
 
 t_vec3	vec3_sub(t_vec3 u, t_vec3 v)

@@ -6,7 +6,7 @@
 /*   By: snagulap <snagulap@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 16:48:54 by snagulap          #+#    #+#             */
-/*   Updated: 2023/10/09 10:56:59 by snagulap         ###   ########.fr       */
+/*   Updated: 2023/10/09 12:43:01 by snagulap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ t_vec3		vec3_sub(t_vec3 u, t_vec3 v);
 t_vec3		vec3_mul(t_vec3 u, t_vec3 v);
 t_vec3		vec3_scalar_multiply(t_vec3 v, double t);
 t_vec3		vec3_scalar_divide(t_vec3 v, double t);
+t_vec3		vec3_scalar_add(t_vec3 v, double t);
 double		vec3_dot(t_vec3 u, t_vec3 v);
 t_vec3		vec3_cross(t_vec3 u, t_vec3 v);
 double		vec3_length(t_vec3 v);

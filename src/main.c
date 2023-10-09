@@ -6,15 +6,15 @@
 /*   By: snagulap <snagulap@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 10:14:55 by snagulap          #+#    #+#             */
-/*   Updated: 2023/10/09 11:35:55 by snagulap         ###   ########.fr       */
+/*   Updated: 2023/10/09 12:43:54 by snagulap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "miniRT.h"
 #include "ray.h"
 
-#define WINDOW_WIDTH 800
-#define WINDOW_HEIGHT 400
+#define WINDOW_WIDTH 1600
+#define WINDOW_HEIGHT 1000
 
 typedef t_vec3	t_color;
 
@@ -86,14 +86,11 @@ t_color	ray_color_sphere(t_ray r)
 		color.e[2] = 0.5 * (N.e[2] + 1);
 		return (color);
 	}
+	// Background color
 	unit_direction = vec3_normalize(r.dir);
 	a = 0.5 * (unit_direction.e[1] + 1.0);
-	white_color.e[0] = 1.0;
-	white_color.e[1] = 1.0;
-	white_color.e[2] = 1.0;
-	blue_color.e[0] = 0.5;
-	blue_color.e[1] = 0.7;
-	blue_color.e[2] = 1.0;
+	white_color = make_vec3(1.0, 1.0, 1.0);
+	blue_color = make_vec3(0.5, 0.7, 1.0);
 	interpolated_color.e[0] = (1.0 - a) * white_color.e[0] + a
 		* blue_color.e[0];
 	interpolated_color.e[1] = (1.0 - a) * white_color.e[1] + a
@@ -206,6 +203,7 @@ int	solveQuadratic(double a, double b, double c, double *root1, double *root2)
 	}
 }
 
+
 int	hitSphere(const t_Sphere *sphere, const t_ray *ray, double *t)
 {
 	t_vec3	oc;
@@ -214,48 +212,43 @@ int	hitSphere(const t_Sphere *sphere, const t_ray *ray, double *t)
 	double	c;
 	int		numRoots;
 
-	oc.e[0] = ray->orig.e[0] - sphere->center.e[0];
-	oc.e[1] = ray->orig.e[1] - sphere->center.e[1];
-	oc.e[2] = ray->orig.e[2] - sphere->center.e[2];
-	a = ray->dir.e[0] * ray->dir.e[0] + ray->dir.e[1] * ray->dir.e[1]
-		+ ray->dir.e[2] * ray->dir.e[2];
-	b = 2 * (oc.e[0] * ray->dir.e[0] + oc.e[1] * ray->dir.e[1] + oc.e[2]
-			* ray->dir.e[2]);
-	c = oc.e[0] * oc.e[0] + oc.e[1] * oc.e[1] + oc.e[2] * oc.e[2]
-		- sphere->radius * sphere->radius;
+	oc = vec3_sub(ray->orig, sphere->center);
+	a = vec3_dot(ray->dir, ray->dir);
+	b = 2.0 * vec3_dot(oc, ray->dir);
+	c = vec3_dot(oc, oc) - sphere->radius * sphere->radius;
 	double root1, root2;
 	numRoots = solveQuadratic(a, b, c, &root1, &root2);
 	if (numRoots == 0)
 	{
-		return (0); // No intersection
+		return (0);
 	}
 	else if (numRoots == 1)
 	{
 		if (root1 > 0)
 		{
 			*t = root1;
-			return (1); // One intersection point in front of ray
+			return (1);
 		}
-		return (0); // Intersection point behind ray
+		return (0);
 	}
 	else
 	{
 		if (root1 > 0 && root2 > 0)
 		{
 			*t = fmin(root1, root2);
-			return (1); // Two intersection points, take the nearest
+			return (1);
 		}
 		else if (root1 > 0)
 		{
 			*t = root1;
-			return (1); // One intersection point in front of ray
+			return (1);
 		}
 		else if (root2 > 0)
 		{
 			*t = root2;
-			return (1); // One intersection point in front of ray
+			return (1);
 		}
-		return (0); // Both intersection points behind ray
+		return (0);
 	}
 }
 
@@ -264,53 +257,39 @@ t_color	rayColor(const t_ray *ray)
 	t_Sphere	sphere;
 	double		t;
 	t_vec3		normal;
-	double		len;
 	t_color		color;
-	// t_color		background;
-	t_color	white_color;
-	t_color	blue_color;
-	t_color	interpolated_color;
-	t_vec3	unit_direction;
-	double	a;
+	t_color		white_color;
+	t_color		blue_color;
+	t_color		interpolated_color;
+	t_vec3		unit_direction;
+	double		a;
 
 	sphere.center.e[0] = 0;
 	sphere.center.e[1] = 0;
 	sphere.center.e[2] = -1;
 	sphere.radius = 0.5;
+	// vec3_sub(ray_at(r, t), make_vec3(0, 0, -1)));
 	if (hitSphere(&sphere, ray, &t))
 	{
 		normal.e[0] = ray->orig.e[0] + t * ray->dir.e[0] - sphere.center.e[0];
 		normal.e[1] = ray->orig.e[1] + t * ray->dir.e[1] - sphere.center.e[1];
 		normal.e[2] = ray->orig.e[2] + t * ray->dir.e[2] - sphere.center.e[2];
-		len = sqrt(normal.e[0] * normal.e[0] + normal.e[1] * normal.e[1]
-				+ normal.e[2] * normal.e[2]);
-		normal.e[0] /= len;
-		normal.e[1] /= len;
-		normal.e[2] /= len;
-		color.e[0] = 0.5 * (normal.e[0] + 1.0);
-		color.e[1] = 0.5 * (normal.e[1] + 1.0);
-		color.e[2] = 0.5 * (normal.e[2] + 1.0);
+		normal = vec3_normalize(normal);
+		normal = vec3_scalar_add(normal, 1.0);
+		color = vec3_scalar_multiply(normal, 0.5);
 		return (color);
 	}
 	// Background color
 	unit_direction = vec3_normalize(ray->dir);
 	a = 0.5 * (unit_direction.e[1] + 1.0);
-	white_color.e[0] = 1.0;
-	white_color.e[1] = 1.0;
-	white_color.e[2] = 1.0;
-	blue_color.e[0] = 0.5;
-	blue_color.e[1] = 0.7;
-	blue_color.e[2] = 1.0;
+	white_color = make_vec3(1.0, 1.0, 1.0);
+	blue_color = make_vec3(0.5, 0.7, 1.0);
 	interpolated_color.e[0] = (1.0 - a) * white_color.e[0] + a
 		* blue_color.e[0];
 	interpolated_color.e[1] = (1.0 - a) * white_color.e[1] + a
 		* blue_color.e[1];
 	interpolated_color.e[2] = (1.0 - a) * white_color.e[2] + a
 		* blue_color.e[2];
-	return (interpolated_color);
-	// background.e[0] = 0.5;
-	// background.e[1] = 0.7;
-	// background.e[2] = 1.0;
 	return (interpolated_color);
 }
 
@@ -321,38 +300,26 @@ void	view_point_sphere(void *mlx, void *window)
 	t_vec3	lowerLeftCorner;
 	t_vec3	horizontal;
 	t_vec3	vertical;
-	t_vec3	origin;
+	t_vec3	camera_view;
 	double	u;
 	double	v;
 	t_ray	ray;
 	t_color	color;
-	int		ir;
-	int		ig;
-	int		ib;
-	int		color1;
+	int		img_col;
 
-	width = 800;
-	height = 400;
-	printf("P3\n%d %d\n255\n", width, height);
-	lowerLeftCorner.e[0] = -2.0;
-	lowerLeftCorner.e[1] = -1.0;
-	lowerLeftCorner.e[2] = -1.0;
-	horizontal.e[0] = 4.0;
-	horizontal.e[1] = 0.0;
-	horizontal.e[2] = 0.0;
-	vertical.e[0] = 0.0;
-	vertical.e[1] = 2.0;
-	vertical.e[2] = 0.0;
-	origin.e[0] = 0.0;
-	origin.e[1] = 0.0;
-	origin.e[2] = 0.0;
-	for (int j = 0; j < height ; j++)
+	width = 1600;
+	height = 1000;
+	lowerLeftCorner = make_vec3(-2.0, -1.0, -1.0);
+	horizontal = make_vec3(4.0, 0.0, 0.0);
+	vertical = make_vec3(0.0, 2.0, 0.0);
+	camera_view = make_vec3(0,0,0);
+	for (int j = 0; j < height; j++)
 	{
 		for (int i = 0; i < width; i++)
 		{
 			u = (double)i / (double)width;
 			v = (double)j / (double)height;
-			ray.orig = origin;
+			ray.orig = camera_view;
 			ray.dir.e[0] = lowerLeftCorner.e[0] + u * horizontal.e[0] + v
 				* vertical.e[0];
 			ray.dir.e[1] = lowerLeftCorner.e[1] + u * horizontal.e[1] + v
@@ -360,17 +327,12 @@ void	view_point_sphere(void *mlx, void *window)
 			ray.dir.e[2] = lowerLeftCorner.e[2] + u * horizontal.e[2] + v
 				* vertical.e[2];
 			color = rayColor(&ray);
-			ir = (int)(255.99 * color.e[0]);
-			ig = (int)(255.99 * color.e[1]);
-			ib = (int)(255.99 * color.e[2]);
-			color1 = ((int)(255.999 * color.e[0]) << 16) | ((int)(255.999
+			img_col = ((int)(255.999 * color.e[0]) << 16) | ((int)(255.999
 						* color.e[1]) << 8) | (int)(255.999 * color.e[2]);
-			mlx_pixel_put(mlx, window, i, j, color1);
+			mlx_pixel_put(mlx, window, i, j, img_col);
 		}
 	}
 }
-
-
 
 int	main(int argc, char **argv)
 {
