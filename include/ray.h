@@ -6,7 +6,7 @@
 /*   By: snagulap <snagulap@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 16:48:54 by snagulap          #+#    #+#             */
-/*   Updated: 2023/10/09 12:43:01 by snagulap         ###   ########.fr       */
+/*   Updated: 2023/10/10 21:24:47 by snagulap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,12 +18,12 @@ typedef struct s_vec
 	double	e[3];
 }			t_vec3;
 
-typedef struct s_coordinates
-{
-	double	x;
-	double	y;
-	double	z;
-}			t_coordinates;
+// typedef struct s_coordinates
+// {
+// 	double	x;
+// 	double	y;
+// 	double	z;
+// }			t_coordinates;
 
 typedef struct s_ray
 {
@@ -37,7 +37,7 @@ double		vec3_get(const t_vec3 *v, int i);
 void		vec3_set(t_vec3 *v, int i, double value);
 t_vec3		vec3_add(t_vec3 u, t_vec3 v);
 t_vec3		vec3_sub(t_vec3 u, t_vec3 v);
-t_vec3		vec3_mul(t_vec3 u, t_vec3 v);
+t_vec3		vec3_multiply(t_vec3 u, t_vec3 v);
 t_vec3		vec3_scalar_multiply(t_vec3 v, double t);
 t_vec3		vec3_scalar_divide(t_vec3 v, double t);
 t_vec3		vec3_scalar_add(t_vec3 v, double t);
