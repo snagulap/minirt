@@ -6,7 +6,7 @@
 #    By: snagulap <snagulap@student.42heilbronn.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/09/30 15:15:48 by snagulap          #+#    #+#              #
-#    Updated: 2023/10/12 18:37:34 by snagulap         ###   ########.fr        #
+#    Updated: 2023/10/14 19:25:12 by snagulap         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,10 +19,10 @@ SRC_DIR		=	src/
 OBJ_DIR		=	obj/
 INC_DIR		=	include/
 
-CFILES=main.c vec.c ray.c shapes.c colors.c vec1.c vec2.c camera.c \
+CFILES=main.c vec.c ray.c shapes.c colors.c vec1.c vec2.c camera.c\
 		ft_init_get_data.c ft_init_utils.c ft_init.c ft_init_check_input.c \
 		ft_init_check_float.c
-OFILES=main.o vec.o ray.o shapes.o colors.o vec1.o vec2.o camera.o \
+OFILES=main.o vec.o ray.o shapes.o colors.o vec1.o vec2.o camera.o\
 		ft_init_get_data.o ft_init_utils.o ft_init.o ft_init_check_input.o \
 		ft_init_check_float.o
 SRC=$(addprefix $(SRC_DIR), $(CFILES))

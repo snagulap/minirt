@@ -6,7 +6,7 @@
 /*   By: snagulap <snagulap@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 13:31:42 by snagulap          #+#    #+#             */
-/*   Updated: 2023/10/12 19:20:37 by snagulap         ###   ########.fr       */
+/*   Updated: 2023/11/02 17:31:47 by snagulap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,8 @@ int	solveQuadratic(double a, double b, double c, double *root1, double *root2)
 
 	discriminant = b * b - 4 * a * c;
 	if (discriminant < 0)
-	{
 		// No real roots
 		return (0);
-	}
 	else if (discriminant == 0)
 	{
 		// One real root
@@ -39,6 +37,33 @@ int	solveQuadratic(double a, double b, double c, double *root1, double *root2)
 	}
 }
 
+// int hitSphere(const t_sphere *sphere, const t_ray *ray, double *t, t_vec3 *normal) {
+//     t_vec3 oc = vec3_sub(ray->orig, sphere->center);
+//     double a = vec3_dot(ray->dir, ray->dir);
+//     double b = vec3_dot(oc, ray->dir);
+//     double c = vec3_dot(oc, oc) - (sphere->radius * sphere->radius);
+
+//     double discriminant = b * b - a * c;
+
+//     if (discriminant > 0) {
+//         double temp = (-b - sqrt(discriminant)) / a;
+//         if (temp > 0) {
+//             *t = temp;
+//             *normal = vec3_normalize(vec3_sub(vec3_add(ray->orig, vec3_scalar_multiply(ray->dir, *t)), sphere->center));
+//             return 1;
+//         }
+
+//         temp = (-b + sqrt(discriminant)) / a;
+//         if (temp > 0) {
+//             *t = temp;
+//             *normal = vec3_normalize(vec3_sub(vec3_add(ray->orig, vec3_scalar_multiply(ray->dir, *t)), sphere->center));
+//             return 1;
+//         }
+//     }
+
+//     return 0;
+// }
+
 int	hitSphere(const t_sphere *sphere, const t_ray *ray, double *t)
 {
 	t_vec3	oc;
@@ -48,20 +73,16 @@ int	hitSphere(const t_sphere *sphere, const t_ray *ray, double *t)
 	int		num_roots;
 
 	oc = vec3_sub(ray->orig, sphere->center);
-	printf("%f %f %f\n", oc.e[0], oc.e[1], oc.e[2]);
-	printf("%f %f %f\n", ray->dir.e[0], ray->dir.e[1], ray->dir.e[2]);
 	a = vec3_dot(ray->dir, ray->dir);
 	printf("a:::%f\n", a);
 	b = 2.0 * vec3_dot(oc, ray->dir);
 	printf("b:::%f\n", b);
 	c = vec3_dot(oc, oc) - (sphere->radius / 2.0) * (sphere->radius / 2.0);
-	printf("c:::%f\n", a);
+	printf("c:::%f\n", c);
 	double root1, root2;
 	num_roots = solveQuadratic(a, b, c, &root1, &root2);
 	if (num_roots == 0)
-	{
 		return (0);
-	}
 	else if (num_roots == 1)
 	{
 		if (root1 > 0)

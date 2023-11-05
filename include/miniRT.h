@@ -6,7 +6,7 @@
 /*   By: snagulap <snagulap@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/27 14:25:12 by snagulap          #+#    #+#             */
-/*   Updated: 2023/10/12 19:16:42 by snagulap         ###   ########.fr       */
+/*   Updated: 2023/11/02 17:19:21 by snagulap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,23 +19,34 @@
 # include <stdio.h>
 # include <stdlib.h>
 
-typedef t_vec3			t_color;
+// typedef t_vec3	t_color;
 
 # define WINDOW_WIDTH 1600
 # define WINDOW_HEIGHT 900
+
+typedef struct s_color {
+    double red;
+    double green;
+    double blue;
+}	t_color;
+
+// typedef struct s_color
+// {
+// 	double e[3];
+// } t_color;
 
 typedef struct s_rgb // colors
 {
 	double red;
 	double green;
 	double blue;
-	double rgb_in_hex_representation;
+	// double rgb_in_hex_representation;
 }						t_rgb;
 
 typedef struct s_ambient_lightning
 {
-	double				ambient_lighting_ratio;
-	t_rgb				color;
+	double				am_ratio;
+	t_color				color;
 }						t_ambient_lightning;
 
 // typedef struct s_camera
@@ -70,12 +81,18 @@ typedef struct s_camera
 // 	t_rgb rgb_colors; // bonus
 // }						t_light;
 
-typedef struct s_light
-{
-	t_vec3				coordinates_of_the_light_point;
-	double				light_brightness_ratio;
-	t_rgb rgb_colors; // bonus
-}						t_light;
+typedef struct s_light {
+    t_vec3 light_point;
+    double brightness;
+    t_color color; // Change t_rgb to t_color
+} t_light;
+
+// typedef struct s_light
+// {
+// 	t_color				color;
+// 	double				brightness;
+// 	t_rgb rgb_colors; // bonus
+// }						t_light;
 
 typedef struct s_sphere
 {
@@ -106,6 +123,10 @@ typedef struct s_cylinder
 	t_rgb				rgb_colors;
 }						t_cylinder;
 
+t_color	make_color(double red, double green, double blue);
+t_rgb	make_color_rgb(double red, double green, double blue);
+
+
 typedef struct s_minirt
 {
 	t_ambient_lightning	lightning;
@@ -119,14 +140,16 @@ typedef struct s_minirt
 
 // void					image_Setup(void *mlx, void *window, t_camera cam);
 void					image_Setup1(void *mlx, void *window);
-t_camera				camera_viewpoint(void);
+void					camera_viewpoint(void *mlx, void *window);
 // void					camera_viewpoint(void *mlx, void *window);
-t_color					rayColor(const t_ray *ray);
+// t_color					rayColor(t_ray *ray);
+t_color rayColor(t_ray *ray, t_sphere   *sphere);
 int						solveQuadratic(double a, double b, double c,
 							double *root1, double *root2);
 int						hitSphere(const t_sphere *sphere, const t_ray *ray,
 							double *t);
 
+// int hitSphere(const t_sphere *sphere, const t_ray *ray, double *t, t_vec3 *normal);
 int						solveQuadratic(double a, double b, double c,
 							double *root1, double *root2);
 int						hitPlane(const t_ray *ray, const t_plane *plane,
