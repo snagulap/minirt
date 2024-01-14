@@ -87,7 +87,7 @@ void	camera_viewpoint(void *mlx, void *window)
 			pixel_center = vec3_add(pixel00_loc,
 					vec3_add(vec3_scalar_multiply(pixel_delta_u, i),
 						vec3_scalar_multiply(pixel_delta_v, j)));
-			ray_direction = vec3_add(pixel_center, camera.ray.orig);
+			ray_direction = vec3_sub(pixel_center, camera.ray.orig);
 			ray = make_ray(camera.ray.orig, ray_direction);
 			color = rayColor(&ray, &sphere);//rayColor(&ray);
 			img_col = ((int)(255.999 * color.red) << 16) | ((int)(255.999
