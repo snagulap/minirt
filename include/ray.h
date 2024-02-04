@@ -6,7 +6,7 @@
 /*   By: snagulap <snagulap@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 16:48:54 by snagulap          #+#    #+#             */
-/*   Updated: 2023/10/10 21:24:47 by snagulap         ###   ########.fr       */
+/*   Updated: 2024/01/14 16:44:59 by snagulap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,35 @@ typedef struct s_vec
 // 	double	z;
 // }			t_coordinates;
 
-typedef struct s_ray
-{
-	t_vec3	orig;
-	t_vec3	dir;
-}			t_ray;
+// typedef struct s_ray
+// {
+// 	t_vec3	orig;
+// 	t_vec3	dir;
+// }			t_ray;
+
+// typedef struct s_ray{
+//     t_point3 orig;
+//     t_vec3 dir;
+// } t_ray;
+
+// typedef struct s_vec3{
+//     double x, y, z;
+// } t_vec3;
+
+// typedef struct s_color{
+//     double r, g, b;
+// } t_color;
+
+typedef struct s_ray{
+    t_vec3 orig;
+    t_vec3 dir;
+} t_ray;
+
+typedef struct s_rgb{
+    double red;
+    double green;
+    double blue;
+} t_rgb;
 
 t_vec3		make_vec3(double e0, double e1, double e2);
 t_vec3		vec3_negate(t_vec3 v);

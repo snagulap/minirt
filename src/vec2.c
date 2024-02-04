@@ -6,7 +6,7 @@
 /*   By: snagulap <snagulap@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 14:23:49 by snagulap          #+#    #+#             */
-/*   Updated: 2023/11/02 17:03:40 by snagulap         ###   ########.fr       */
+/*   Updated: 2024/01/19 01:01:18 by snagulap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,9 @@ t_vec3	vec3_cross(t_vec3 u, t_vec3 v)
 // Function to compute the length of a vec3 vector
 double	vec3_length(t_vec3 v)
 {
-	return (sqrt(v.e[0] * v.e[0] + v.e[1] * v.e[1] + v.e[2] * v.e[2]));
+	double r;
+	r = (v.e[0] * v.e[0] + v.e[1] * v.e[1] + v.e[2] * v.e[2]);
+	return (sqrt(r));
 }
 
 // Function to compute the squared length of a vec3 vector

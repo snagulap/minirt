@@ -6,7 +6,7 @@
 /*   By: snagulap <snagulap@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/26 10:14:55 by snagulap          #+#    #+#             */
-/*   Updated: 2023/11/02 16:28:40 by snagulap         ###   ########.fr       */
+/*   Updated: 2024/01/13 17:27:49 by snagulap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,10 +120,10 @@ void	camera_viewpoint(void *mlx, void *window)
 	j = 0;
 	i = 0;
 	image_width = WINDOW_WIDTH;
-image_height = WINDOW_HEIGHT;
+	image_height = WINDOW_HEIGHT;
 	focal_length = 1.0;
 	viewport_height = 1.0;
-aspect_ratio = image_width / image_height;
+	aspect_ratio = image_width / image_height;
 	viewport_width = ((double)image_width / image_height);
 	camera_center = make_vec3(0, 0, 0);
 	viewport_u = make_vec3(viewport_width, 0, 0);
@@ -385,7 +385,25 @@ int	main(int argc, char **argv)
 	window = mlx_new_window(mlx, WINDOW_WIDTH, WINDOW_HEIGHT, "My Window");
 	if (!window)
 		return (1);
-	camera_viewpoint(mlx, window);
+	//    t_sphere spheres[2];
+    // spheres[0] = (t_sphere){make_vec3(0, 0, 20.6), 12.6, make_color_rgb(0.0, 0.0, 255)};
+    // spheres[1] = (t_sphere){make_vec3(5, 0, 25.0), 5.0, make_color_rgb(255.0, 0.0, 0.0)};
+
+    // // Example: Create an array of planes
+    // t_plane planes[1];
+    // planes[0] = (t_plane){make_vec3(0, -10.0, 0), make_vec3(0, 1.0, 0)};
+
+    // // Example: Create an array of lights
+    // t_light lights[1];
+    // lights[0] = (t_light){make_vec3(-40.0, 50.0, 0.0), 0.6, make_color(10, 0, 255)};
+
+    // Example: Create your camera
+    t_camera camera;
+    // ... (initialize your camera)
+
+    // Render the scene
+    camera_viewpoint(mlx, window, &camera);
+	// camera_viewpoint(mlx, window);
 	mlx_loop(mlx);
 	mlx_destroy_window(mlx, window);
 	return (0);

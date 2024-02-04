@@ -6,7 +6,7 @@
 /*   By: snagulap <snagulap@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 13:25:36 by snagulap          #+#    #+#             */
-/*   Updated: 2023/10/14 19:22:34 by snagulap         ###   ########.fr       */
+/*   Updated: 2023/12/23 09:46:12 by snagulap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_color	ray_color(const t_ray *r)
 	t_vec3 unit_direction = unit_vector(&(r->dir)); // Calculate unit direction
 	double a = 0.5 * (unit_direction.e[1] + 1.0);   // Compute blending factor
 	// Define colors for the sky gradient
-	white.e[0] = 1.0;
+	white.e[0] = 1.0;f
 	white.e[1] = 1.0;
 	white.e[2] = 1.0;
 	light_blue.e[0] = 0.5;
