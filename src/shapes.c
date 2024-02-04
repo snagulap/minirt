@@ -6,7 +6,7 @@
 /*   By: snagulap <snagulap@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 13:31:42 by snagulap          #+#    #+#             */
-/*   Updated: 2024/02/04 12:41:03 by snagulap         ###   ########.fr       */
+/*   Updated: 2024/02/04 16:03:41 by snagulap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,23 +101,24 @@
  bool hit_sphere(const t_ray* r, double tmin, double tmax, t_hit_record* rec, t_obj *objt)
  {
 	t_vec3 oc = vec3_sub(r->orig, objt->cor);	
-	// double a = vec3_length(r->dir);
+	double a = vec3_length(r->dir);
 	double b = vec3_dot(oc, r->dir);
 	double c = vec3_dot(oc, oc) - (objt->rad * objt->rad);
 	// if (c > 0 && b > 0)
 	// 	return (0);
-	double discriminant = b * b - c;
+	double discriminant = b * b - a * c;
 	float sqrtd = sqrt(discriminant);
-	float t = (-b - sqrtd); 
+	float t = (-b - sqrtd) / a; 
 	// if (t <= tmin)
     if (t <= tmin || tmax <= t)
     {	
-	    t = (-b + sqrt(discriminant));
+	    t = (-b + sqrt(discriminant)) / a;
 		if (t <= tmin || tmax <= t )	
             return 0;
 	}
-	// float t = (-b - sqrtd) ; 
+	// float t = (-b - sqrtd) / a ; 
 	// if (t <= tmin || tmax <= t)
+		
 	// 	return (0);	
 	rec->t = t;
 	rec->p = vec3_add(r->orig, vec3_scalar_multiply(r->dir, t));

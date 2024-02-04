@@ -6,7 +6,7 @@
 /*   By: snagulap <snagulap@student.42heilbronn.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/06 13:37:28 by snagulap          #+#    #+#             */
-/*   Updated: 2024/02/04 12:20:18 by snagulap         ###   ########.fr       */
+/*   Updated: 2024/02/04 15:22:14 by snagulap         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,10 @@ void	camera_viewpoint(void *mlx, void *window, t_camera *camera)
 	aspect_ratio = (double)WINDOW_WIDTH / (double)WINDOW_HEIGHT;
 	image_width = (int)WINDOW_WIDTH;
 	image_height = (int)(image_width / aspect_ratio);
-	if (image_height < 1)
-		image_height = 1;
+	// if (image_height < 1)
+	// 	image_height = 1;
 	// Camera Position and Orientation
-	camera->ray.orig = (t_vec3){1.0, 10.0, 0};
+	camera->ray.orig = (t_vec3){-50.0, 0.0, 20.0};
 	t_vec3 look_at = (t_vec3){0.0, 0.0, 1.0}; //Assuming it's looking at (0,0,1)
 	t_vec3 up = (t_vec3){0.0, 1.0, 0.0};      // Up vector
 	focal_length = 1;
@@ -110,19 +110,18 @@ void	camera_viewpoint(void *mlx, void *window, t_camera *camera)
 			pixel_center = vec3_add(pixel00_loc,
 					vec3_add(vec3_scalar_multiply(pixel_delta_u, i),
 						vec3_scalar_multiply(pixel_delta_v, j)));
-<<<<<<< HEAD
 			ray_direction = vec3_sub(pixel_center, camera->ray.orig);
 			ray = make_ray(camera->ray.orig, ray_direction);
 			color = rayColor(&ray, &object);//rayColor(&ray);
 			img_col = ((int)(255.999 * color.e[0]) << 16) | ((int)(255.999
 						* color.e[1]) << 8) | (int)(255.999 * color.e[2]);
-=======
-			ray_direction = vec3_sub(pixel_center, camera.ray.orig);
-			ray = make_ray(camera.ray.orig, ray_direction);
-			color = rayColor(&ray, &sphere);//rayColor(&ray);
-			img_col = ((int)(255.999 * color.red) << 16) | ((int)(255.999
-						* color.green) << 8) | (int)(255.999 * color.blue);
->>>>>>> 0e2b57ec344a7e67ef716a32de101906f5641038
+
+			// ray_direction = vec3_sub(pixel_center, camera.ray.orig);
+			// ray = make_ray(camera.ray.orig, ray_direction);
+			// color = rayColor(&ray, &sphere);//rayColor(&ray);
+			// img_col = ((int)(255.999 * color.red) << 16) | ((int)(255.999
+			// 			* color.green) << 8) | (int)(255.999 * color.blue);
+
 			mlx_pixel_put(mlx, window, i, j, img_col);
 		}
 	}
